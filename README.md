@@ -1,6 +1,11 @@
-# Welcome to React Router!
+# Welcome to YAT!
+Yet Another Template
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A modern, production-ready template for building full-stack React applications using React Router
+
+Stack includes: `React Router` on `Cloudflare` with `Hono`, `TRPC`, `Drizzle ORM`, `Better Auth` and `Resend` and `Shadcn UI`
+
+Frontend is in `/app`, while the backend is in `/workers`
 
 ## Features
 
