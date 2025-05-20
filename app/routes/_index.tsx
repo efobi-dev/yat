@@ -1,12 +1,26 @@
-import { useState } from "react";
-import { Button } from "~/components/ui/button";
+import { useTRPC } from "workers/trpc/client";
+import { useQuery } from "@tanstack/react-query";
+import { auth } from "~/lib/auth.server";
+import type { Route } from "./+types/_index";
+import { Skeleton } from "~/components/ui/skeleton";
 
-export default function Index() {
-	const [num, setNum] = useState(0);
+export async function loader({ request }: Route.LoaderArgs) {
+	const authz = await auth.api.getSession({ headers: request.headers });
+	return { user: authz?.user.name };
+}
+
+export default function Index({ loaderData }: Route.ComponentProps) {
+	const { user } = loaderData;
+	const trpc = useTRPC();
+	const { data, error, isPending } = useQuery(
+		trpc.public.hello.queryOptions(user),
+	);
 	return (
 		<main className="flex flex-col items-center justify-center h-screen">
+			{error?.message}
 			This is the homepage
-			<Button onClick={() => setNum((prev) => prev + 1)}>{num}</Button>
+			<h1>{isPending ? <Skeleton /> : data ? data : "Guest"}</h1>
+			{!user && "Sign in to continue"}
 		</main>
 	);
 }

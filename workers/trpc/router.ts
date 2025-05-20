@@ -1,16 +1,8 @@
-import { initTRPC } from "@trpc/server";
-import { z } from "zod";
-import type { Context } from "./context";
+import { createTRPCRouter } from "./utils";
+import { publicRouter } from "./routes/public";
 
-const t = initTRPC.context<Context>().create();
-
-export const appRouter = t.router({
-	hello: t.procedure.input(z.string().nullish()).query(({ input }) => {
-		return `Hello ${input ?? "World"}!`;
-	}),
-	goodbye: t.procedure.input(z.string().nullish()).query(({ input }) => {
-		return `Goodbye ${input ?? "World"}!`;
-	}),
+export const appRouter = createTRPCRouter({
+	public: publicRouter,
 });
 
 export type AppRouter = typeof appRouter;

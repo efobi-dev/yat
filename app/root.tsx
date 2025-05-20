@@ -17,6 +17,7 @@ import {
 } from "remix-themes";
 import { Toaster } from "./components/ui/sonner";
 import { themeSessionResolver } from "./sessions.server";
+import { TRPCReactProvider } from "workers/trpc/client";
 
 export async function loader({ request }: Route.LoaderArgs) {
 	const { getTheme } = await themeSessionResolver(request);
@@ -28,9 +29,14 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function AppWithProviders({ loaderData }: Route.ComponentProps) {
 	const data = loaderData;
 	return (
-		<ThemeProvider specifiedTheme={data.theme} themeAction="/action/set-theme">
-			<App />
-		</ThemeProvider>
+		<TRPCReactProvider>
+			<ThemeProvider
+				specifiedTheme={data.theme}
+				themeAction="/action/set-theme"
+			>
+				<App />
+			</ThemeProvider>
+		</TRPCReactProvider>
 	);
 }
 
