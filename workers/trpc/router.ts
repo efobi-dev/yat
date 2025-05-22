@@ -1,5 +1,5 @@
-import { createTRPCRouter } from "./utils";
 import { publicRouter } from "./routes/public";
+import { createTRPCRouter } from "./utils";
 
 export const appRouter = createTRPCRouter({
 	public: publicRouter,

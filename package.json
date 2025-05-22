@@ -1,5 +1,5 @@
 {
-	"name": "verifind",
+	"name": "yat",
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -12,8 +12,8 @@
 		"typecheck": "bun run typegen && react-router typegen && tsc -b",
 		"db:generate": "drizzle-kit generate",
 		"db:studio": "drizzle-kit studio",
-		"db:push": "wrangler d1 migrations apply verifind --local",
-		"db:deploy": "wrangler d1 migrations apply verifind --remote"
+		"db:push": "wrangler d1 migrations apply yat --local",
+		"db:deploy": "wrangler d1 migrations apply yat --remote"
 	},
 	"dependencies": {
 		"@hono/trpc-server": "^0.3.4",

@@ -1,8 +1,8 @@
-import { initTRPC, TRPCError } from "@trpc/server";
+import { TRPCError, initTRPC } from "@trpc/server";
 import type { HonoRequest } from "hono";
-import { auth } from "~/lib/auth.server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { auth } from "~/lib/auth.server";
 
 export async function createContext({
 	req,

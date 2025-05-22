@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "verifind",
+	"name": "yat",
 	"compatibility_date": "2025-04-04",
 	"main": "./workers/app.ts",
 	"compatibility_flags": ["nodejs_compat"],
@@ -14,8 +14,8 @@
 	"d1_databases": [
 		{
 			"binding": "DATABASE",
-			"database_name": "verifind",
-			"database_id": "f9076d58-c559-4b26-9300-8606346a9006"
+			"database_name": "yat",
+			"database_id": "a94dc341-42e3-4b07-8d5c-c580f3a82794"
 		}
 	]
 	/**

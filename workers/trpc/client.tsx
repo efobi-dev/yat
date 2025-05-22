@@ -1,9 +1,9 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTRPCClient, httpBatchLink, loggerLink } from "@trpc/client";
-import type { AppRouter } from "./router";
-import superjson from "superjson";
-import { useState } from "react";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { createTRPCContext } from "@trpc/tanstack-react-query";
+import { useState } from "react";
+import superjson from "superjson";
+import type { AppRouter } from "./router";
 
 function makeQueryClient() {
 	return new QueryClient({

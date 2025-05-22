@@ -1,8 +1,8 @@
-import { useTRPC } from "workers/trpc/client";
 import { useQuery } from "@tanstack/react-query";
+import { useTRPC } from "workers/trpc/client";
+import { Skeleton } from "~/components/ui/skeleton";
 import { auth } from "~/lib/auth.server";
 import type { Route } from "./+types/_index";
-import { Skeleton } from "~/components/ui/skeleton";
 
 export async function loader({ request }: Route.LoaderArgs) {
 	const authz = await auth.api.getSession({ headers: request.headers });
