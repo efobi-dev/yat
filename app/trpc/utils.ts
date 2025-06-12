@@ -1,18 +1,15 @@
 import { TRPCError, initTRPC } from "@trpc/server";
-import type { HonoRequest } from "hono";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { auth } from "~/lib/auth.server";
+import { db } from "~/db";
+import type { LoaderFunctionArgs } from "react-router";
 
-export async function createContext({
-	req,
-	env,
-	headers,
-}: { req: HonoRequest; env: Env; headers: Headers }) {
+export async function createContext({ headers }: { headers: Headers }) {
 	const authz = await auth.api.getSession({ headers: headers });
 	const source = headers.get("x-trpc-source") ?? "unknown";
 	console.log(">>> tRPC Request from", source, "by", authz?.user.email);
-	return { req, env, headers, user: authz?.user };
+	return { user: authz?.user, db };
 }
 export type Context = Awaited<ReturnType<typeof createContext>>;
 
@@ -58,3 +55,9 @@ export const adminProcedure = t.procedure.use(({ ctx, next }) => {
 		},
 	});
 });
+
+export const caller = async ({ request }: LoaderFunctionArgs) => {
+	const { appRouter } = await import("./router");
+	const createCaller = createCallerFactory(appRouter);
+	return createCaller(await createContext({ headers: request.headers }));
+};

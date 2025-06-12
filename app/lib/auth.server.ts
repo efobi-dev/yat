@@ -2,8 +2,8 @@ import { env } from "cloudflare:workers";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { admin, emailOTP } from "better-auth/plugins";
-import { db } from "workers/db";
-import { client } from "workers/trpc/client";
+import { db } from "~/db";
+import { client } from "~/trpc/client";
 
 export const auth = betterAuth({
 	appName: "VeriFind",

@@ -15,7 +15,7 @@ import {
 	ThemeProvider,
 	useTheme,
 } from "remix-themes";
-import { TRPCReactProvider } from "workers/trpc/client";
+import { TRPCReactProvider } from "~/trpc/client";
 import { Toaster } from "./components/ui/sonner";
 import { themeSessionResolver } from "./sessions.server";
 
