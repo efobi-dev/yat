@@ -15,4 +15,9 @@ export default defineConfig({
 		//   enabled: true
 		// }})
 	],
+	build: {
+		rollupOptions: {
+			external: ["cloudflare:workers"],
+		},
+	},
 });

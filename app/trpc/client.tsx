@@ -4,7 +4,6 @@ import { createTRPCContext } from "@trpc/tanstack-react-query";
 import { useState } from "react";
 import superjson from "superjson";
 import type { AppRouter } from "./router";
-import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 
 function makeQueryClient() {
 	return new QueryClient({
@@ -24,6 +23,19 @@ function getQueryClient() {
 	if (!browserQueryClient) browserQueryClient = makeQueryClient();
 	return browserQueryClient;
 }
+
+const getBaseUrl = () => {
+	if (typeof window !== "undefined") {
+		// Browser should use relative URL
+		return "";
+	}
+	if (import.meta.env.DEV) {
+		// Local dev on wrangler/localhost
+		return "http://localhost:8787";
+	}
+	// Fallback for SSR/Workers – let runtime set this
+	return undefined;
+};
 const links = [
 	loggerLink({
 		enabled: (op) =>
@@ -32,7 +44,7 @@ const links = [
 	}),
 	httpBatchLink({
 		transformer: superjson,
-		url: `${import.meta.url.split("/workers/")[0]}/api/trpc`,
+		url: getBaseUrl() ? `${getBaseUrl()}/api/trpc` : "/api/trpc",
 		headers() {
 			const headers = new Headers();
 			headers.set("x-trpc-source", "react");

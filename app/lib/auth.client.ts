@@ -4,7 +4,7 @@ import {
 	inferAdditionalFields,
 } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
-import type { auth } from "./auth.server";
+import type { auth } from "./auth";
 
 const authClient = createAuthClient({
 	baseURL: import.meta.env.DEV

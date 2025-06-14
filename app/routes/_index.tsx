@@ -1,6 +1,6 @@
-import { auth } from "~/lib/auth.server";
-import type { Route } from "./+types/_index";
+import { auth } from "~/lib/auth";
 import { caller } from "~/trpc/utils";
+import type { Route } from "./+types/_index";
 
 export async function loader(args: Route.LoaderArgs) {
 	const api = caller(args);

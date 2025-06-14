@@ -1,12 +1,15 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { appRouter } from "~/trpc/router";
-import { createCallerFactory, createContext } from "~/trpc/utils";
+import { createContext } from "~/trpc/utils";
 import type { Route } from "./+types/api.trpc.$";
-import { db } from "~/db";
 
-export async function loader(args: Route.LoaderArgs) {}
+export async function loader(args: Route.LoaderArgs) {
+	return handler(args);
+}
 
-export async function action(args: Route.ActionArgs) {}
+export async function action(args: Route.ActionArgs) {
+	return handler(args);
+}
 
 function handler(args: Route.LoaderArgs | Route.ActionArgs) {
 	return fetchRequestHandler({

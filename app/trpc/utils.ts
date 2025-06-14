@@ -1,9 +1,9 @@
 import { TRPCError, initTRPC } from "@trpc/server";
+import type { LoaderFunctionArgs } from "react-router";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { auth } from "~/lib/auth.server";
 import { db } from "~/db";
-import type { LoaderFunctionArgs } from "react-router";
+import { auth } from "~/lib/auth";
 
 export async function createContext({ headers }: { headers: Headers }) {
 	const authz = await auth.api.getSession({ headers: headers });
